@@ -1,2 +1,2 @@
-from .journal_entry import Journal_Entry
+from .entry import Entry
 from .mood import Mood

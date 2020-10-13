@@ -1,6 +1,6 @@
 from os import stat
 
-class Journal_Entry():
+class Entry():
 
   def __init__(self, id, concept, entry, date, moodId):
     self.id = id
