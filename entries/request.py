@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Journal_Entry
+from models import Entry
 
 def get_all_entries():
   with sqlite3.connect("./dailyjournal.db") as conn:
@@ -24,7 +24,7 @@ def get_all_entries():
 
     for row in dataset:
 
-      entry = Journal_Entry(row['id'], row['concept'], row['entry'], row['date'], row['moodId'])
+      entry = Entry(row['id'], row['concept'], row['entry'], row['date'], row['moodId'])
 
       entries.append(entry.__dict__)
 
@@ -48,6 +48,6 @@ def get_single_entry(id):
 
   data = db_cursor.fetchone()
 
-  entry = Journal_Entry(data['id'], data['concept'], data['entry'], data['date'], data['moodId'])
+  entry = Entry(data['id'], data['concept'], data['entry'], data['date'], data['moodId'])
 
   return json.dumps(entry.__dict__)
