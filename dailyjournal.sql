@@ -1,0 +1,17 @@
+CREATE TABLE `JournalEntries` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `concept` TEXT NOT NULL,
+  `entry` TEXT NOT NULL,
+  `date` INTEGER NOT NULL,
+  `moodId` INTEGER
+);
+
+CREATE TABLE `Moods` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `label` TEXT NOT NULL,
+  FOREIGN KEY(`id`) REFERENCES `JournalEntries`(`moodId`)
+);
+
+INSERT INTO `JournalEntries` VALUES (null, "1235", "123", 1598458543321, 1);
+
+SELECT * FROM `JournalEntries`;
