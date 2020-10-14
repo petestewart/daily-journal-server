@@ -29,4 +29,4 @@ INSERT INTO `JournalEntries` VALUES (null, "Funny", "Knock Knock", 1598557373697
 
 
 
-SELECT * FROM `Moods`;
+SELECT * FROM `JournalEntries`;
