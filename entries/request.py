@@ -75,3 +75,15 @@ def delete_entry(id):
     DELETE FROM JournalEntries
     WHERE id = ?
     """, (id, ))
+
+def create_entry(new_entry):
+  with sqlite3.connect("./dailyjournal.db") as conn:
+
+    db_cursor = conn.cursor()
+
+    db_cursor.execute("""
+    INSERT INTO JournalEntries
+      ( id, concept, entry, date, moodId )
+    VALUES
+      ( Null, ?, ?, ?, ?)
+    """, (new_entry['concept'], new_entry['entry'], new_entry['date'], new_entry['moodId']))

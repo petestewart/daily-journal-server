@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-from entries import get_all_entries, get_single_entry, delete_entry
+from entries import get_all_entries, get_single_entry, delete_entry, create_entry
 from moods import get_all_moods, get_single_mood
 
 
@@ -72,22 +72,21 @@ class HandleRequests(BaseHTTPRequestHandler):
 
     # Here's a method on the class that overrides the parent's method.
     # It handles any POST request.
-    # def do_POST(self):
-    #     self._set_headers(201)
-    #     content_len = int(self.headers.get('content-length', 0))
-    #     post_body = self.rfile.read(content_len)
+    def do_POST(self):
+        self._set_headers(201)
+        content_len = int(self.headers.get('content-length', 0))
+        post_body = self.rfile.read(content_len)
 
-    #     # Convert JSON string to Python dictionary
-    #     post_body = json.loads(post_body)
+        # Convert JSON string to Python dictionary
+        post_body = json.loads(post_body)
 
-    #     # Parse the URL
-    #     (resource, id) = self.parse_url(self.path)
+        # Parse the URL
+        (resource, id) = self.parse_url(self.path)
 
-    #     # Add a new item to the list.
-    #     if resource == "animals":
-    #         new_animal = create_animal(post_body)
-    #         # Encode the new animal and send in response
-    #         self.wfile.write(f"{new_animal}".encode())
+        if resource == "entries":
+            new_entry = create_entry(post_body)
+            # Encode the new animal and send in response
+            self.wfile.write(f"{new_entry}".encode())
 
     #     if resource == "locations":
     #         new_location = create_location(post_body)
