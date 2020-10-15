@@ -34,10 +34,10 @@ def get_single_mood(id):
 
   db_cursor.execute("""
   SELECT
-    a.id,
-    a.label
-  FROM moods a
-  WHERE a.id = ?
+    m.id,
+    m.label
+  FROM moods m
+  WHERE m.id = ?
   """, ( id, ))
 
   data = db_cursor.fetchone()
