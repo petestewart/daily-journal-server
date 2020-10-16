@@ -87,3 +87,25 @@ def create_entry(new_entry):
     VALUES
       ( Null, ?, ?, ?, ?)
     """, (new_entry['concept'], new_entry['entry'], new_entry['date'], new_entry['moodId']))
+
+def update_entry(id, updated_entry):
+  with sqlite3.connect("./dailyjournal.db") as conn:
+
+    db_cursor = conn.cursor()
+
+    db_cursor.execute("""
+    UPDATE JournalEntries
+      SET
+        concept = ?,
+        entry = ?,
+        date = ?,
+        moodId = ?
+      WHERE id = ?
+    """, (updated_entry['concept'], updated_entry['entry'], updated_entry['date'], updated_entry['moodId'], id))
+
+    rows_affected = db_cursor.rowcount
+
+  if rows_affected == 0:
+    return False
+  else:
+    return True
